@@ -1,7 +1,7 @@
 var tree = [];
 var flowers = [];
 var branchNumber = 0;
-var shrink, shake, intensity, grow = false,
+var shake, intensity, grow = false,
     shed, gravity, flsize, grav, wind_dir, windcheck;
 var cnv;
 
@@ -116,4 +116,3 @@ function branchIt() {
         }
         tree[i].grown = true;
     }
-}
