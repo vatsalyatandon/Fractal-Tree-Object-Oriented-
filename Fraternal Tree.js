@@ -1,7 +1,7 @@
 var tree = [];
 var flowers = [];
 var branchNumber = 0;
-var shake, intensity, grow = false,
+var shrink, shake, intensity, grow = false,
     shed, gravity, flsize, grav, wind_dir, windcheck;
 var cnv;
 
@@ -13,12 +13,14 @@ function setup() {
     shake.parent("shaking");
     //shake.position(windowWidth-470, 1000);
 
-    intensity = createSlider(0.1, 2, 0.25, 0);
+    intensity = createSlider(0.1, 2, 0.5, 0);
     intensity.parent("shake");
     cnv.parent("canvasParent");
     flsize = createSlider(5, 15, 7, 0);
     flsize.parent("flsize");
 
+    shrink = createSlider(0.30, 1, 0.75, 0);
+    shrink.parent("shrink");
 
 
     var grows = createButton("Grow leaves");
@@ -112,7 +114,11 @@ function saveTree() {
 function branchIt() {
 
     for (var i = tree.length - 1; i >= 0; i--) {
-           branchNumber += 2;
+        if (!tree[i].grown) {
+            tree.push(tree[i].spawnA(shrink.value()));
+            tree.push(tree[i].spawnB(shrink.value()));
+            branchNumber += 2;
         }
         tree[i].grown = true;
     }
+}
